@@ -2,8 +2,11 @@ import * as S from './MusicLibrary.styles'
 import { LuLibrary } from 'react-icons/lu'
 import { MdAdd } from 'react-icons/md'
 import MusicLibraryItem from '../MusicLibraryItem/MusicLibraryItem'
+import useSessionStorage from '../../hooks/useSessionStorage'
 
 const MusicLibrary = () => {
+    const storage = useSessionStorage('library')
+    const libraries = storage.value
     return (
         <S.Container>
             <S.Header>
@@ -15,13 +18,16 @@ const MusicLibrary = () => {
                 </S.Actions>
             </S.Header>
             <S.LibraryList>
-
-                <MusicLibraryItem
-                    imgSrc='https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg'
-                    title='Liked Songs'
-                    counter={5}
-                />
-
+                {libraries && libraries.map((library: any) => (
+                    library?.items.length > 0 && (
+                        <MusicLibraryItem
+                            imgSrc={library.items[0].cover}
+                            title={library.name}
+                            counter={library.items.length}
+                            key={library.id}
+                        />
+                    )
+                ))}
             </S.LibraryList>
         </S.Container>
     )

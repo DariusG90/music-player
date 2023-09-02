@@ -7,9 +7,9 @@ export const Container = styled.div`
 `
 
 export const PlayerContainer = styled.div`
-    border: 1px solid #000;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
     height: 6rem;
+    display: flex;
 `

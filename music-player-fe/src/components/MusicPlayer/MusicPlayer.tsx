@@ -9,7 +9,7 @@ import useSessionStorage from '../../hooks/useSessionStorage'
 const MusicPlayer = () => {
     const { state, dispatch } = useLibrary()
     const [library, setLibrary] = useState<any>()
-    const song = state.song
+    const song = state?.song
     const storage = useSessionStorage('library').getSessionValue()
     const songsArray = library?.items
     const currentSongIndex = songsArray?.findIndex((el: any) => el?.id === song?.id)
@@ -47,6 +47,7 @@ const MusicPlayer = () => {
 
     useEffect(() => {
         if (audioEnded) {
+            handleNextSong()
             if (isRepeat) {
                 play()
             }
@@ -55,6 +56,24 @@ const MusicPlayer = () => {
             }
         }
     }, [audioEnded])
+
+    const handlePause = () => {
+        pause()
+        dispatch({
+            type: 'pause',
+            song: song,
+            playlistId: library.id
+        })
+    }
+
+    const handlePlay = () => {
+        play()
+        dispatch({
+            type: 'play',
+            song: song,
+            playlistId: library.id
+        })
+    }
 
     const handleNextSong = () => {
         const currentSongIndex = songsArray?.findIndex((el: any) => el.id === song.id)
@@ -96,12 +115,12 @@ const MusicPlayer = () => {
                 songSrc={song?.audio}
                 key={song?.id}
                 playlistId={state.playlistId}
-                play={play}
+                play={handlePlay}
                 currentTime={currentTime}
                 duration={duration}
                 seekTo={seekTo}
                 setVolume={setVolume}
-                pause={pause}
+                pause={handlePause}
                 isPlaying={isPlaying}
                 isRepeat={isRepeat}
                 setIsRepeat={setIsRepeat}

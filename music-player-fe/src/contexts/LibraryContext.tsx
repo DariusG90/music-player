@@ -12,13 +12,12 @@ type Action = {
 const LibraryContext = React.createContext<any>('')
 
 const libraryReducer = (state: any, action: Action) => {
-    
     switch (action.type) {
         case 'play': {
             return { play: true, song: action.song, playlistId: action.playlistId }
         }
         case 'pause': {
-            return { play: false }
+            return { play: false, song: action.song, playlistId: action.playlistId }
         }
         default: {
             throw new Error(`Unhandled action type: ${action}`)

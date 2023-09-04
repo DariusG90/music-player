@@ -18,6 +18,18 @@ export const PlaylistTable = styled.table`
     th, td {
         padding: 0.25rem 1rem;
     }
+    .row {
+        cursor: pointer;
+    }
+
+    .icon-index-column {
+        width: 2rem;
+        text-align: center;
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
 
     .title {
         display: flex;

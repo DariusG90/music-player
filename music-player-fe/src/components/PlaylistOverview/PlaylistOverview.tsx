@@ -2,10 +2,14 @@ import { useState } from 'react'
 import { useLibrary } from '../../contexts/LibraryContext'
 import { PlaylistItemsProps } from '../../types/types'
 import * as S from './PlaylistOverview.styles'
+import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai'
+import { BsSoundwave } from 'react-icons/bs'
 
 const PlaylistOverview = ({ items, playlistId }: PlaylistItemsProps) => {
-    const { dispatch } = useLibrary()
+    const { dispatch, state } = useLibrary()
     const [isPlaying, setIsPlaying] = useState(false)
+    const [rowState, setRowState] = useState<any>({ id: state?.song?.id, play: false })
+    const [icon, setIcon] = useState<any>(undefined)
 
     const handleItemClick = (item: any) => {
         dispatch({
@@ -16,6 +20,17 @@ const PlaylistOverview = ({ items, playlistId }: PlaylistItemsProps) => {
         setIsPlaying(true)
     }
 
+
+    const handleIconDisplay = (id: number, index: number) => {
+        if (state?.song?.id === id) {
+            if (state?.play) {
+                return <BsSoundwave />
+            }
+        }
+
+        return index + 1
+    }
+
     return (
         <S.PlaylistOverview>
             <S.PlaylistTable>
@@ -23,11 +38,13 @@ const PlaylistOverview = ({ items, playlistId }: PlaylistItemsProps) => {
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Date added</th>
                     </tr>
                     {items?.length > 0 && (items.map((item: any, index: number) => (
-                        <tr key={item.id} onClick={() => handleItemClick(item)}>
-                            <td >{index + 1}</td>
+                        <tr key={item.id}
+                            onClick={() => handleItemClick(item)}
+                            className='row'
+                        >
+                            <td className='icon-index-column'>{handleIconDisplay(item.id, index)}</td>
                             <td className='title'>
                                 <img src={item.cover} />
                                 <S.PlaylistItemAttributes>
@@ -35,7 +52,6 @@ const PlaylistOverview = ({ items, playlistId }: PlaylistItemsProps) => {
                                     <S.PlaylistItemArtist>{item.artist}</S.PlaylistItemArtist>
                                 </S.PlaylistItemAttributes>
                             </td>
-                            <td>{new Date().getTime()}</td>
                         </tr>
                     )))}
 

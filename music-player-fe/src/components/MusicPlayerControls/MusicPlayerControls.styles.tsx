@@ -14,6 +14,8 @@ export const PlayerControls = styled.div`
         height: 1.3rem;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
+        cursor: pointer;
+
     }
 
     .bigSVG {

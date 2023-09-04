@@ -34,15 +34,26 @@ const MusicPlayerControls = ({
         const newTime = parseFloat(e.target.value);
         seekTo(newTime);
     };
+
+    const handleMuteVolume = () => {
+        if(localVolume > 0){
+            setVolume(0)
+            setLocalVolume(0)
+        } else {
+            setVolume(1)
+            setLocalVolume(1)
+        }
+    }
+
     const handleVolumeIcon = () => {
         if (localVolume <= 0.5 && localVolume > 0) {
-            return <BsVolumeDownFill />
+            return <BsVolumeDownFill onClick={handleMuteVolume} />
         }
         if (localVolume == 0) {
-            return <BsFillVolumeMuteFill />
+            return <BsFillVolumeMuteFill onClick={handleMuteVolume} />
         }
 
-        return <BsFillVolumeUpFill />
+        return <BsFillVolumeUpFill onClick={handleMuteVolume} />
     }
 
     const handleVolumeChange = (e: any) => {
@@ -76,7 +87,7 @@ const MusicPlayerControls = ({
             </S.PlayerContainer>
             <S.VolumeContainer>
                 {handleVolumeIcon()}
-                <S.VolumeLine type='range' min={0} max={1} step={0.01} onChange={handleVolumeChange} />
+                <S.VolumeLine type='range' min={0} max={1} step={0.01} onChange={handleVolumeChange} value={localVolume} />
             </S.VolumeContainer>
         </>
     )

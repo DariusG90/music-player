@@ -39,7 +39,7 @@ const MusicPlayer = () => {
     } = useAudio(song?.audio)
 
     useEffect(() => {
-        if (audioObj) {
+        if (audioObj && !isRepeat) {
             audioObj.pause();
             audioObj.currentTime = 0;
         }

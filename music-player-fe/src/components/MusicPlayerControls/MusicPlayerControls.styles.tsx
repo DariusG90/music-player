@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const PlayerContainer = styled.div`
-
+    width: 45rem;
 `
 
 export const PlayerControls = styled.div`

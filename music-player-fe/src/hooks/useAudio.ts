@@ -17,9 +17,10 @@ const useAudio = (src: string) => {
         if (src) {
             const audioObj = new Audio(src)
             setAudio(audioObj)
-            setCurrentTime(0)
-            audioObj.play()
-            setIsPlaying(true)
+            audioObj.play().then(() => {
+                setCurrentTime(0)
+                setIsPlaying(true)
+            })
         }
     }, [src])
 

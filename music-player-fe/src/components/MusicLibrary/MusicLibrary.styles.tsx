@@ -1,14 +1,5 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-    // border: 1px solid #000;
-    width: 400px;
-    border-radius: 0.5rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-    height: calc(100vh - 7rem);
-`
-
 export const Header = styled.span`
     display: flex;
     padding: 1rem;

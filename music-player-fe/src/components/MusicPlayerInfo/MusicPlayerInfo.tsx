@@ -1,18 +1,19 @@
 import { AiOutlineHeart } from 'react-icons/ai';
 import * as S from './MusicPlayerInfo.styles'
+import { SongOverviewProps } from '../../types/types';
 
-const MusicPlayerInfo = () => {
+const MusicPlayerInfo = ({ imgSrc, songTitle, artistName }: SongOverviewProps) => {
     return (
         <S.InfoContainer>
             <S.InfoThumbnail>
-                <img src='https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg' />
+                <img src={imgSrc} />
             </S.InfoThumbnail>
             <S.InfoAttributes>
                 <S.InfoSongName>
-                    Beaver Creek
+                    {songTitle}
                 </S.InfoSongName>
                 <S.InfoArtistName>
-                    Aso, Middle School, Aviino
+                    {artistName}
                 </S.InfoArtistName>
             </S.InfoAttributes>
             <S.InfoAction>

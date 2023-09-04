@@ -3,7 +3,15 @@ import styled from "styled-components"
 export const LibraryItem = styled.li`
     display: flex;
     flex-direction: row;
+    flex: 0 0 100%;
     margin-bottom: 0.25rem;
+    cursor: pointer;
+    width: 100%;
+
+    :hover {
+        background-color: #f3f3f3;
+    }
+
 `
 
 export const LibraryItemThumbnail = styled.div`

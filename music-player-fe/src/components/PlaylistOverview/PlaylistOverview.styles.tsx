@@ -17,14 +17,13 @@ export const PlaylistTable = styled.table`
 
     th, td {
         padding: 0.25rem 1rem;
-        text-align: center;
     }
 
     .title {
         display: flex;
         align-items: center;
-        justify-content: center;
-        text-align: center;
+        justify-content: start;
+        
         img {
             margin-right: 0.5rem;
             width: 3rem;
@@ -36,7 +35,7 @@ export const PlaylistTable = styled.table`
 export const PlaylistItemAttributes = styled.span`
     display: flex;
     flex-direction: column;
-    
+    justify-content: start;
 `
 
 export const PlaylistItemTitle = styled.span`

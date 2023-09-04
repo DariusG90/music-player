@@ -1,17 +1,35 @@
+import { useParams } from 'react-router-dom';
 import PlaylistOverview from '../PlaylistOverview/PlaylistOverview'
 import SongOverview from '../SongOverview/SongOverview'
-import * as S from './MusicOverview.styles'
+import useSessionStorage from '../../hooks/useSessionStorage';
+import { useEffect, useState } from 'react';
+import { useLibrary } from '../../contexts/LibraryContext';
 
 const MusicOverview = () => {
+    const [library, setLibrary] = useState<any>([])
+    const [firstSong, setFirstSong] = useState<any>()
+    const { playlistId } = useParams()
+    const storage = useSessionStorage('library')
+    const { state, dispatch } = useLibrary()
+
+    useEffect(() => {
+        const lib = storage?.value?.find((lib: any) => lib.id === playlistId)
+        setLibrary(lib)
+        setFirstSong(lib?.items?.[0])
+    }, [playlistId, storage])
+
     return (
-        <S.Container>
+        <>
+            {/* show first song of the playlist */}
             <SongOverview
-                imgSrc='https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg'
-                songTitle='Beaver Creek'
-                artistName='Aso, Middle School, Aviino'
+                imgSrc={state?.song?.cover || firstSong?.cover}
+                songTitle={state?.song?.name || firstSong?.name}
+                artistName={state?.song?.artist || firstSong?.artist}
             />
-            <PlaylistOverview />
-        </S.Container>
+
+            {/* display all songs from the given playlist */}
+            <PlaylistOverview items={library?.items} playlistId={library?.id} />
+        </>
     )
 }
 

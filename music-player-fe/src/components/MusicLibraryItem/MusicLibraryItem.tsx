@@ -1,9 +1,15 @@
 import * as S from './MusicLibraryItem.styles'
 import { MusicLibraryItemProps } from '../../types/types'
+import { useNavigate } from 'react-router-dom'
 
-const MusicLibraryItem = ({ imgSrc, title, type = 'Playlist', counter }: MusicLibraryItemProps) => {
+const MusicLibraryItem = ({ id, imgSrc, title, type = 'Playlist', counter }: MusicLibraryItemProps) => {
+    const navigate = useNavigate();
+
+    const handleItemClick = () => {
+        navigate(`/playlist/${id}`)
+    }
     return (
-        <S.LibraryItem>
+        <S.LibraryItem onClick={handleItemClick}>
             <S.LibraryItemThumbnail>
                 <img src={imgSrc} />
             </S.LibraryItemThumbnail>

@@ -11,17 +11,3 @@ export const Container = styled.div`
 
 
 
-export const VolumeContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    svg {
-        width: 1.3rem;
-        height: 1.3rem;
-    }
-`
-
-export const VolumeLine = styled.input`
-    width: 6rem;
-`

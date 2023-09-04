@@ -1,5 +1,6 @@
 
 type MusicLibraryItemProps = {
+    id: string;
     imgSrc: string;
     title: string;
     type?: string;
@@ -12,5 +13,10 @@ type SongOverviewProps = {
     artistName: string;
 }
 
+type PlaylistItemsProps = {
+    items: any;
+    playlistId: string;
+}
 
-export type { MusicLibraryItemProps, SongOverviewProps }
+
+export type { MusicLibraryItemProps, SongOverviewProps, PlaylistItemsProps }
